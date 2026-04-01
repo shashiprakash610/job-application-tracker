@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Track your job applications, CVs, motivation letters, and interview status in one place.">
+  <title>JobTrackr — Application Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Ambient background blobs -->
+  <div class="ambient-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <span class="logo-text">JobTrackr</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="dashboard" id="nav-dashboard">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-view="applications" id="nav-applications">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          <span>Applications</span>
+        </button>
+        <button class="nav-item" data-view="add" id="nav-add">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="16"/>
+            <line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
+          <span>New Application</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-info">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          <span>v1.0 — Local Storage</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <button class="menu-toggle" id="menu-toggle">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+        <h1 class="page-title" id="page-title">Dashboard</h1>
+        <div class="top-bar-actions">
+          <div class="search-box" id="search-container">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" placeholder="Search applications..." id="search-input">
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard View -->
+      <section class="view active" id="view-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card" id="stat-total">
+            <div class="stat-icon total">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number" id="stat-total-num">0</span>
+              <span class="stat-label">Total Applications</span>
+            </div>
+          </div>
+          <div class="stat-card" id="stat-applied">
+            <div class="stat-icon applied">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number" id="stat-applied-num">0</span>
+              <span class="stat-label">Pending</span>
+            </div>
+          </div>
+          <div class="stat-card" id="stat-interview">
+            <div class="stat-icon interview">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number" id="stat-interview-num">0</span>
+              <span class="stat-label">Interviews</span>
+            </div>
+          </div>
+          <div class="stat-card" id="stat-offered">
+            <div class="stat-icon offered">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number" id="stat-offered-num">0</span>
+              <span class="stat-label">Offers</span>
+            </div>
+          </div>
+          <div class="stat-card" id="stat-rejected">
+            <div class="stat-icon rejected">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="15" y1="9" x2="9" y2="15"/>
+                <line x1="9" y1="9" x2="15" y2="15"/>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number" id="stat-rejected-num">0</span>
+              <span class="stat-label">Rejected</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="recent-section">
+          <div class="section-header">
+            <h2>Recent Applications</h2>
+            <button class="btn btn-ghost" onclick="switchView('applications')">View All</button>
+          </div>
+          <div class="applications-list" id="recent-applications"></div>
+        </div>
+      </section>
+
+      <!-- Applications View -->
+      <section class="view" id="view-applications">
+        <div class="filter-bar">
+          <div class="filter-group">
+            <label>Status</label>
+            <select id="filter-status" class="filter-select">
+              <option value="all">All Status</option>
+              <option value="applied">Applied</option>
+              <option value="interview">Interview</option>
+              <option value="offered">Offered</option>
+              <option value="rejected">Rejected</option>
+              <option value="withdrawn">Withdrawn</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Sort By</label>
+            <select id="filter-sort" class="filter-select">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="company">Company Name</option>
+            </select>
+          </div>
+        </div>
+        <div class="applications-list" id="all-applications"></div>
+      </section>
+
+      <!-- Add Application View -->
+      <section class="view" id="view-add">
+        <div class="form-container">
+          <div class="form-header">
+            <h2>Add New Application</h2>
+            <p>Track your job application with all the details</p>
+          </div>
+          <form id="application-form" enctype="multipart/form-data">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="company_name">Company Name <span class="required">*</span></label>
+                <input type="text" id="company_name" name="company_name" placeholder="e.g. Google, SAP, Siemens" required>
+              </div>
+              <div class="form-group">
+                <label for="job_title">Job Title <span class="required">*</span></label>
+                <input type="text" id="job_title" name="job_title" placeholder="e.g. Software Engineer" required>
+              </div>
+              <div class="form-group">
+                <label for="job_url">Job Posting URL</label>
+                <input type="url" id="job_url" name="job_url" placeholder="https://...">
+              </div>
+              <div class="form-group">
+                <label for="application_date">Application Date <span class="required">*</span></label>
+                <input type="date" id="application_date" name="application_date" required>
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="job_description">Job Description / Advertisement Details</label>
+              <textarea id="job_description" name="job_description" rows="6" placeholder="Paste the job posting details here..."></textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="notes">Personal Notes</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="Any notes about this application..."></textarea>
+            </div>
+
+            <div class="upload-section">
+              <h3>Upload Documents</h3>
+              <div class="upload-grid">
+                <div class="upload-area" id="cv-upload-area">
+                  <input type="file" id="cv-file" name="cv" accept=".pdf,.doc,.docx,.txt,.rtf" hidden>
+                  <div class="upload-content" id="cv-upload-content">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                      <line x1="12" y1="18" x2="12" y2="12"/>
+                      <polyline points="9 15 12 12 15 15"/>
+                    </svg>
+                    <span class="upload-label">Upload CV</span>
+                    <span class="upload-hint">PDF, DOC, DOCX, TXT (max 10MB)</span>
+                  </div>
+                </div>
+                <div class="upload-area" id="ml-upload-area">
+                  <input type="file" id="ml-file" name="motivation_letter" accept=".pdf,.doc,.docx,.txt,.rtf" hidden>
+                  <div class="upload-content" id="ml-upload-content">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                      <line x1="12" y1="18" x2="12" y2="12"/>
+                      <polyline points="9 15 12 12 15 15"/>
+                    </svg>
+                    <span class="upload-label">Upload Motivation Letter</span>
+                    <span class="upload-hint">PDF, DOC, DOCX, TXT (max 10MB)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-ghost" onclick="resetForm()">Clear Form</button>
+              <button type="submit" class="btn btn-primary" id="submit-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                  <polyline points="17 21 17 13 7 13 7 21"/>
+                  <polyline points="7 3 7 8 15 8"/>
+                </svg>
+                Save Application
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Application Detail Modal -->
+      <div class="modal-overlay" id="modal-overlay">
+        <div class="modal" id="detail-modal">
+          <div class="modal-header">
+            <h2 id="modal-title">Application Details</h2>
+            <button class="modal-close" id="modal-close">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+          <div class="modal-body" id="modal-body"></div>
+        </div>
+      </div>
+
+      <!-- Toast Notification -->
+      <div class="toast" id="toast">
+        <span id="toast-message"></span>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
